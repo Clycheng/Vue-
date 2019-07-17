@@ -12,53 +12,54 @@
         <parents></parents>
     </div>
     <script>
-        var child = {
+        var borther ={
             data(){
                 return{
-                   emit:"child值",
-                   cout:0
+                    bortherMsg:"123"
                 }
             },
-            props:['newText'],
-            template:'<button @click ="add">点击</button>',
-            mounted(){
-               this.$emit('custom',this.cout)
-            },
+            template:`<button @click ="pro">点击</button>`,
             methods:{
-                add(){
-                    this.cout ++;
-                    console.log(this.cout)
+                pro(){
+                    vm.$emit("zidingyi",this.bortherMsg)
                 }
             }
         }
-        var parents = {
-            data(){
-                return{
-                    text:123
-                }
-            },
-          
-            template:`<div>{{text}}<child @custom ="add" newText="百度"></child></div>`,
-            components:{
-                child:child
-            },
-            mounted(){
-                console.log($emit)
-            },
-            methods:{
-                add(e){
-                   this.text = e
-                   return e
-                }
+
+
+    var child = {
+        data(){
+            return{
+                childMsg:''
             }
+        },
+        template:`<div>{{childMsg}}</div>`,
+        mounted(){
+            vm.$on("zidingyi",(res)=>{
+                this.childMsg = res
+            })
         }
+    }
+
+
+      var parents = {
+          data(){
+              return{
+                  
+              }
+          },
+          template:`<child></child><borther></borther>`,
+          components:{
+            child,
+            borther
+          }
+      }
       
         
-        new Vue({
+        var vm = new Vue({
             el:"#root",
             components:{
-                parents,
-                child
+                parents
             }
         })
        

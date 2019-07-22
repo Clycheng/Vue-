@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src  = "https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <router-link to = "/Foo">跳转到Foo</router-link>
+     
+        <router-link to = "/Bar">跳转到Bar</router-link>
+
+        <router-view></router-view>
+    </div>
+    <!-- 路由 -->
+    <script>
+        const FooChild = {
+            template:'<a href = "https://www.baidu.com">This is Foo Child</a>'
+        }
+        const Foo = {
+            template:`<div>this is Foo  
+             <router-link to = "/Foo/FooChild">跳转到foochild</router-link>
+             <router-view></router-view>
+             </div>`,
+           
+        }
+        
+        const Bar = {
+            template:`<div>this is Bar</div>`
+        }
+        const routes = [
+               
+            {
+                path:"/Foo",
+                component:Foo,
+                children: [
+                 
+                    { path: 'FooChild', component: FooChild },
+                ]
+            },
+            {
+                path:'/Bar',
+                component:Bar
+            }
+        ]
+        const router =  new VueRouter({
+            routes
+         })
+         new Vue({
+             el:"#root",
+             router
+         })
+
+        //  总结 
+            // 路由嵌套
+                // 父级路由里注册子路由
+                    // 通过父级模板跳转到子模板
+                    // 需要在父级模板里加<router-view>标签
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <p>{{cout}}</p>
+        <p>{{com}}</p>
+        <button @click = "add">增加</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#root",
+            data:{
+                cout:0,
+                className:"class",
+                class:"name"
+            },
+            watch:{
+                cout(newVal,val){
+                    console.log(val,newVal)
+                }
+            },
+            computed:{
+                com(){
+                    console.log('计算了一次')
+                    return this.className+this.class
+                }
+            },
+            methods:{
+                // com(){
+                //     console.log('计算了一次')
+                //     return this.className+this.cout
+                // },
+                add(){
+                    this.cout++
+                }
+            }
+            
+        })
+    
+    </script>
+</body>
+</html>

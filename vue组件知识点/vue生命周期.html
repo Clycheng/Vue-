@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <child></child>
+
+    </div>
+    <script>
+        let child = {
+            data(){
+                return{
+                    text:"Clydecheng"
+                }
+            },
+            template:`<div>{{text}}</div>`,
+            beforeCreate(){
+              alert("开始创建新对象"+this.text)
+            },
+            created(){
+                alert("创建好新对象"+this.text)
+            },
+            befroeMount(){
+                alert("befroeMount"+this.text)
+            },
+            mounted(){ alert("mounted"+this.text)
+            },
+            beforeUpdate(){ console.log("beforeUpdate")
+                console.log(this.$root.$children[0],this.text)
+            },
+            update(){console.log("update")
+                console.log(this.$root.$children[0],this.text)
+            },
+            beforeDestroy(){console.log("beforeDestroy")
+                console.log(this.$root.$children[0].this.text)
+            },
+            destroyed(){console.log("destroyed")
+                console.log(this.$root.$children[0].this.text)
+            }
+
+        }
+        new Vue({
+            el:"#root",
+            data:{
+                text:"程晓磊"
+            },
+            components:{
+                child
+            }
+            
+        })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src  = "https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <router-link  to = "/foo/56">跳转到foo</router-link>
+        <button @click = "active">跳转到bar</button>
+        <router-view></router-view>
+    </div>
+    <!-- <script></script> -->
+    <script>
+        const foo = {
+            props:["id"],
+            template:`<div>{{id}}</div>`
+        }
+        const bar = {
+            template:`<div>bar {{$route.params.name}}</div>`,
+            
+        }
+        const  routes = [
+            {
+                path:"/foo/:id",
+                component:foo,
+                props:true
+            },
+            {
+                path:'/bar/:name',
+                name:"bar",
+                component:bar
+            }            
+        ]
+        const router = new VueRouter({
+            routes,
+            mode:"history"
+        })
+    </script>
+    <script>
+        new Vue({
+            el:"#root",
+            router,
+            methods:{
+                active(){
+                    router.push({
+                        name:"bar",
+                        query:{
+                            name:"123"
+                        }
+                    })
+                }
+            }
+        })
+        console.log(router)
+        // 路由跳转
+            // 1:router-link
+            // 2:router.push
+            // 3:router-replace
+            // 4:router-go
+        // 路由传参
+            // router-link /加参数
+            // router.push
+                    // name+params
+                    // path+query
+    </script>
+    <script>
+        // console.log(window.RTC)
+        fetch('http://localhost') // 返回一个Promise对象
+            .then((res)=>{
+                return res.text() // res.text()是一个Promise对象
+            })
+            .then((res)=>{
+                console.log(res) // res是最终的结果
+            })
+
+    </script>
+</body>
+</html>

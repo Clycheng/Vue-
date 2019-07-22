@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src  = "https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id = "root">
+        <router-link to = "/foo">跳转到foo</router-link>
+        <router-link to = "/bar">跳转到bar</router-link>
+        <router-view></router-view>
+    </div>
+    <script type="x-template" id = "foo">
+            <div >this is foo</div>
+    </script>
+    <script type="x-template" id = "bar">
+            <div >this is bar</div>
+    </script>
+    <script>
+        const foo = {
+            template:"#foo"
+        }
+        const bar = {
+            template:"#bar"
+        }
+        const routes = [
+            {
+                path:"/foo",
+                component:foo
+            },  
+            {
+                path:"/bar",
+                component:bar
+            }
+
+        ]
+
+         const router = new VueRouter({
+             routes
+         })
+         router.beforeEach((to,from,next)=>{
+             console.log(to,from)
+             next()
+         })
+        new Vue({
+            el:"#root",
+            router
+        })
+    </script>
+</body>
+</html>
